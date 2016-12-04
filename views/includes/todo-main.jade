@@ -1,26 +1,17 @@
 form#form-task.form-inline(class='todos')
   .form
     .main
-      input(type='text', id='content', name='content', placeholder='해야할 일이 무엇인가요?')
+     a.btn.btn-primary.btn-lg.btn-block(type='button', href='/todos/new') 방 빌려주기
     .sub
-      .form-group
-        select.form-control(name='category')
-          option(value='개인') 개인
-          option(value='가족') 가족
-          option(value='업무') 업무
-          option(value='기타') 기타
-      .form-group
-        select.form-control(name='priority')
-          option(value='3') 중요
-          option(value='2', selected) 보통
-          option(value='1') 사소
+      label  
   .actions
-      button#post-task.btn.btn-primary.btn-lg.btn-block(type='button') 저장
-
+      
+     a.btn.btn-primary.btn-lg.btn-block(type='button', href='/todos/show') 방 보기
+     
 ul.tasks
 
 .no-task 
-  .alert.alert-info Task가 없습니다.
+  
 script#task-template(type='text/template').
   <li class='task <%= doneStr %>' data-id='<%= id %>'>
     <span class='check'>

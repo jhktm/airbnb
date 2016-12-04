@@ -17,6 +17,7 @@ var routes = require('./routes/index'),
     todos = require('./routes/todos'),
     tasks = require('./routes/tasks');
 
+
 var routeAuth = require('./routes/auth');
 
 
@@ -74,6 +75,7 @@ module.exports = function(app, io) {
   app.use('/users', users);
   app.use('/todos', todos);
   app.use('/tasks', tasks(io));
+ 
   routeAuth(app, passport);
 
   // catch 404 and forward to error handler

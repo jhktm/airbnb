@@ -1,0 +1,49 @@
+extends ../layout
+
+block content
+  .container
+    if post.id
+      h1.page-header 방 수정
+    else
+      h1.page-header 방 올리기
+
+    form(action = (post.id) ? "/todos/#{post.id}?_method=PUT" : "/todos", method='POST')
+      .form-group
+        //- label(for='email') Email address
+        //- input.form-control(type='email', id='email', name='email', placeholder='Email', value=post.email)
+        //- label(for='password') Password
+        //- input.form-control(type='password', id='password', name='password', placeholder='Password')
+        
+    
+      .form-group
+        label(for='title') 제목
+        input.form-control(type='text', id='title', name='title', placeholder='title', value=post.title)
+      .form-group
+        label(for='content') 간단한 설명
+        textarea.form-control(id='content', rows='10', name='content', placeholder='content here')= post.content
+
+      .form-group
+        label(for='city') 도시
+        input.form-control(type='text', id='city', name='city', placeholder='city', value=post.city)
+     
+      .form-group
+        label(for='address') 주소
+        input.form-control(type='text', id='address', name='address', placeholder='address', value=post.address)
+        
+      .form-group
+        label(for='price') 숙소요금
+        input.form-control(type='text', id='price', name='price', placeholder='price', value=post.price)
+        
+      .form-group
+        label(for='facility') 편의 시설
+        input.form-control(type='text', id='facility', name='facility', placeholder='facility', value=post.facility)
+        
+      .form-group
+        label(for='rule') 이용규칙
+        input.form-control(type='text', id='rule', name='rule', placeholder='rule', value=post.rule)
+     
+     
+      div.form-actions
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+        | 
+        button.btn.btn-primary(type='submit') 완료

@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header 제목 #{room.title}
+    p
+      b 
+      | 
+      span 만든날짜 #{moment(room.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
+      | 
+      | (조회수 #{room.read})
+
+    p
+    b 설명
+    p.well(style='white-space:pre;')= room.content
+    p
+    b 편의 시설
+    p.well(style='white-space:pre;')= room.facility
+    p
+    b 이용규칙
+    p.well(style='white-space:pre;')= room.rule
+    
+    a.btn.btn-default(href='/todos/show') 목록
