@@ -38,6 +38,15 @@ router.get("/new", function (req, res, next) { //방만들기
   res.render("posts/edit",{post: {}});
 });
 
+router.get("/:id/edit", function (req, res, next) { //방만들기
+    Room.findById(req.params.id, function(err, room) {
+    if (err) {
+      return next(err);
+    }
+    res.render('posts/edit', {post: room});//post가 만들어졋고 이건 현재의 data 다 post를 보낸다
+  });
+});
+
 
 router.get("/:id", function (req, res, next) {
   Room.findById(req.params.id, function(err, room) {
@@ -65,7 +74,10 @@ router.post("/", function (req, res, next) { // 방만들기
       address: req.body.address,
       facility: req.body.facility,
       price:req.body.price,
-      rule: req.body.rule
+      rule: req.body.rule,
+
+      name: req.user.name,
+      email: req.user.email
     }) ;
 
     room.save(function(err){

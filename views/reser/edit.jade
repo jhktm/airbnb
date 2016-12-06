@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .container
+    if post.id
+      h1.page-header 예약하기
+    else
+      h1.page-header 예약하기
+
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
+      .form-group
+        label(for='checkin') checkin
+        input.form-control(type='text', id='checkin', name='checkin', placeholder='checkin', value=post.checkin)
+      .form-group
+        label(for='checkout') checkout
+        input.form-control(type='text', id='checkout', name='checkout', placeholder='checkout', value=post.checkout)
+      .form-group
+        label(for='people') people
+        input.form-control(type='text', id='people', name='people', placeholder='people', value=post.people)
+      div.form-actions
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+        | 
+        button.btn.btn-primary(type='submit') 완료

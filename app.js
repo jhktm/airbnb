@@ -16,6 +16,7 @@ var routes = require('./routes/index'),
     users = require('./routes/users'),
     todos = require('./routes/todos'),
     tasks = require('./routes/tasks');
+    posts = require('./routes/posts');
 
 
 var routeAuth = require('./routes/auth');
@@ -75,6 +76,7 @@ module.exports = function(app, io) {
   app.use('/users', users);
   app.use('/todos', todos);
   app.use('/tasks', tasks(io));
+  app.use('/posts', posts)
  
   routeAuth(app, passport);
 

@@ -10,7 +10,10 @@ var schema = new Schema({
   facility:{type: String}, //편의시설
   rule:{type: String}, //이용규칙
   createdAt: {type: Date, default: Date.now},//작성일
-  read: {type: Number ,default: 0}
+  read: {type: Number ,default: 0},
+  
+  name:{type:String},
+  email:{type: String}
 
 }, {
   toJSON: { virtuals: true},

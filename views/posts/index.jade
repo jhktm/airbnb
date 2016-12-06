@@ -8,6 +8,7 @@ block content
     table.table.table-bordered
       thead
         tr
+          th 작성자
           th 제목
           th 도시
           th 올린 날짜
@@ -15,10 +16,11 @@ block content
           th 가격
           th 조회수
           th
-          th
+          
       tbody
         each room in rooms
           tr
+            td= room.name
             td
                 a(href='/todos/#{room.id}')= room.title
             td=room.city
@@ -26,12 +28,17 @@ block content
             td= room.address
             td= room.price
             td= room.read
-            td
-              a.btn.btn-xs.btn-default(href=) 예약
-            td
-              a.btn.btn-xs.btn-default(href='/posts/#{room.id}/edit') 수정
-              | 
-              a.btn.btn-xs.btn-default(data-id=room.id, class='delete') 삭제
+            
+            if (currentUser.email == room.email) 
+              td
+                a.btn.btn-xs.btn-default(href='/todos/#{room.id}/edit') 수정
+                | 
+                a.btn.btn-xs.btn-default(data-id=room.id, class='delete') 삭제
+                a.btn.btn-xs.btn-default(href='/posts') 예약확인
+            else
+              td
+                a.btn.btn-xs.btn-default(href='/posts/new') 예약
+            
 
     
 
@@ -60,7 +67,7 @@ block content
       $(".delete").click(function(e) {
         var id = $(e.currentTarget).data('id');
         if (confirm('정말 삭제하시겠습니까?')) {
-          $("#deleteForm").attr('action', "/posts/" + id + "?_method=DELETE").submit();          
+          $("#deleteForm").attr('action', "/todos/" + id + "?_method=DELETE").submit();          
         }
         return false;
       });
