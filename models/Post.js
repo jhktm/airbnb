@@ -9,8 +9,11 @@ var schema = new Schema({
   people:{type:Number , default:0},
   createdAt: {type: Date, default: Date.now},//작성일
   read: {type: Number ,default: 0},
-  name:{type:String},
-  email:{type: String}
+
+  roomnamem: {type: String},
+  name:{type:String}, //작성자 저장
+  email:{type: String}//작성한 사람
+
   
 
 

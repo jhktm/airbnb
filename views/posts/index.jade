@@ -34,10 +34,11 @@ block content
                 a.btn.btn-xs.btn-default(href='/todos/#{room.id}/edit') 수정
                 | 
                 a.btn.btn-xs.btn-default(data-id=room.id, class='delete') 삭제
-                a.btn.btn-xs.btn-default(href='/posts') 예약확인
+
+                a.btn.btn-xs.btn-default(href='/posts/#{room.id}') 예약확인
             else
               td
-                a.btn.btn-xs.btn-default(href='/posts/new') 예약
+                a.btn.btn-xs.btn-default(href='/posts/#{room.id}/new') 예약
             
 
     
@@ -60,7 +61,7 @@ block content
 
 
 
-    
+
   form#deleteForm(style='display:none', method="POST")
             
     script(type='text/javascript').

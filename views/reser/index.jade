@@ -8,16 +8,19 @@ block content
     table.table.table-bordered
       thead
         tr
+          th 예약한 방
           th checkin
-          th checout
+          th checkout
           th 숙박 인원
           th 신청 날짜
           th
       tbody
         each post in posts
+          if(name == post.name)
           tr
+            td= post.title
             td= post.checkin
-            td= post.checout
+            td= post.checkout
             td=post.people 
             td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td

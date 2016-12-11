@@ -4,6 +4,10 @@
 /*global confirm:false */
 /*jslint browser:true */
 
+
+    
+
+
 var TaskController = function() {
   function setAjaxHandler() {
     $( document ).ajaxStart(function() {

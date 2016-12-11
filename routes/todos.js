@@ -38,6 +38,7 @@ router.get("/new", function (req, res, next) { //방만들기
   res.render("posts/edit",{post: {}});
 });
 
+
 router.get("/:id/edit", function (req, res, next) { //방만들기
     Room.findById(req.params.id, function(err, room) {
     if (err) {

@@ -10,7 +10,6 @@ block content
       | 
       | (조회수 #{room.read})
       p 만든이 : #{room.name} 이메일 : #{room.email}
-
     p
     b 설명
     p.well(style='white-space:pre;')= room.content
@@ -20,5 +19,36 @@ block content
     p
     b 이용규칙
     p.well(style='white-space:pre;')= room.rule
-    
-    a.btn.btn-default(href='/todos/show') 목록
+    b 주소
+    p.well(style='white-space:pre;')= room.address
+    b 지도
+      #map
+      script(type='text/javascript').
+        var mapContainer = document.getElementById('map'), 
+        mapOption = {
+          center: new daum.maps.LatLng(33.450701, 126.570667),
+          level: 3 
+        };  
+        var map = new daum.maps.Map(mapContainer, mapOption);
+        
+        var geocoder = new daum.maps.services.Geocoder();
+
+        geocoder.addr2coord('제주특별자치도 제주시 첨단로 242', function(status, result) {        
+            if (status === daum.maps.services.Status.OK) {
+
+                var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+              
+                var marker = new daum.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                var infowindow = new daum.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">#{room.title}</div>'
+                });
+                infowindow.open(map, marker);
+                map.setCenter(coords);
+            } 
+        });
+    p
+    a.btn.9btn-default(href='/todos/show') 목록

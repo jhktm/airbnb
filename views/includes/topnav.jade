@@ -12,8 +12,10 @@
       ul.nav.navbar-nav
         li
           a(href='/todos') 방 예약
-        li
-          a(href='/users') 회원가입된 유저
+        if (currentUser) 
+          if(currentUser.administer =="yes")
+            li
+              a(href='/users') 회원가입된 유저
       ul.nav.navbar-nav.navbar-right
         if (currentUser) 
           li

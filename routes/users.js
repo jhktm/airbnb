@@ -79,13 +79,15 @@ router.put('/:id', function(req, res, next) {
       return res.redirect('back');
     }
 
-    if (user.password !== req.body.current_password) {
-      req.flash('danger', '현재 비밀번호가 일치하지 않습니다.');
+    if(!user.validatePassword(req.body.current_password)) {
+      req.flash('danger', '현재22222 비밀번호가 일치하지 않습니다.');
       return res.redirect('back');
     }
 
     user.name = req.body.name;
     user.email = req.body.email;
+    user.host = req.body.host;
+    user.traveler =  req.body.traveler;
     if (req.body.password) {
       user.password = user.generateHash(req.body.password);
     }
@@ -95,7 +97,7 @@ router.put('/:id', function(req, res, next) {
         return next(err);
       }
       req.flash('success', '사용자 정보가 변경되었습니다.');
-      res.redirect('/users');
+      res.redirect('/');
     });
   });
 });
@@ -106,7 +108,7 @@ router.delete('/:id', function(req, res, next) {
       return next(err);
     }
     req.flash('success', '사용자 계정이 삭제되었습니다.');
-    res.redirect('/users');
+    res.redirect('/');
   });
 });
 
@@ -134,8 +136,12 @@ router.post('/', function(req, res, next) {
       return res.redirect('back');
     }
     var newUser = new User({
+
       name: req.body.name,
       email: req.body.email,
+    
+      host: req.body.host,
+      traveler: req.body.traveler
     });
     newUser.password = newUser.generateHash(req.body.password);
 
