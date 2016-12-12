@@ -2,22 +2,64 @@ extends ../layout
 
 block content
   .container
+  .col-md-2
+  .col-md-8
+   center
     if post.id
-      h1.page-header 예약하기
+      h1.page-header 방 [ #{room.title} ]예약하기
     else
-      h1.page-header 예약하기
+      h1.page-header 방 [ #{room.title} ]예약하기
 
-    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
+
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts/#{room.id}", method='POST')
+       
+      //- .form-group
+      //-   label(for='checkin_month') 체크인
+      //-     select(name='checkin_month')
+      //-       -for(i=0; i<=12; i++){
+      //-         option(value='#{i+1}') #{i+1}
+      //-       -}
+      //-     span 월 -
+      //-     select(name='checkin_day')
+      //-       -for(i=0; i<=30; i++){
+      //-         option(value='#{i+1}') #{i+1}
+      //-       -}
+      //-     span 일  ~
+      //-   label(for='checkout_month') 체크아웃
+      //-     select(name='checkout_month')
+      //-       -for(i=0; i<=12; i++){
+      //-           option(value='#{i+1}') #{i+1}
+      //-       -}
+      //-     span 월 -
+      //-     select(name='checkout_day')
+      //-       -for(i=0; i<=30; i++){
+      //-           option(value='#{i+1}') #{i+1}
+      //-       -}
+      //-     span 일
       .form-group
-        label(for='checkin') checkin
-        input.form-control(type='text', id='checkin', name='checkin', placeholder='checkin', value=post.checkin)
+        p
+          | 체크인  :
+          input#check_in(type='text', name='check_in') 
+          |~
+          | 체크아웃  :
+          input#check_out(type='text', name='check_out')
+
+
+
       .form-group
-        label(for='checkout') checkout
-        input.form-control(type='text', id='checkout', name='checkout', placeholder='checkout', value=post.checkout)
-      .form-group
-        label(for='people') people
+        label(for='people') 인원
         input.form-control(type='text', id='people', name='people', placeholder='people', value=post.people)
-      div.form-actions
+   
+  
+      div.form-actions 
         a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
         | 
         button.btn.btn-primary(type='submit') 완료
+
+  script.
+      $( function() {
+      $( "#check_in" ).datepicker();
+      $( "#check_out" ).datepicker();
+      } );
+
+  

@@ -2,30 +2,49 @@ extends ../layout
 
 block content
   .container
-    h1.page-header 예약 리스트
+    h1.page-header #{room.title} 예약 리스트
     
-      //- | total #{pagination.numPosts} posts
     table.table.table-bordered
       thead
         tr
           th 예약한 방
-          th checkin
-          th checkout
+          th 예약한 사람
+          th 예약 기간
           th 숙박 인원
           th 신청 날짜
+          th 예약 승인 상태
+          th
           th
       tbody
         each post in posts
-          if(name == post.name)
-          tr
-            td= post.title
-            td= post.checkin
-            td= post.checkout
-            td=post.people 
-            td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
-            td
-              a.btn.btn-xs.btn-default(href ) 예약 확인 하기
-              | 
-              a.btn.btn-xs.btn-default(href) 예약 받지 않기
+          if(room.title == post.title)
+            
+            tr
+              td= post.title
+              td= post.name
+              td= post.check_in +'~' + post.check_out
+                
+        
+              td= post.people 
+              td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
+              td=post.status
+              td
+                a.btn.btn-xs.btn-default(data-id=post.id, class='delete') 삭제
+              td
+                
+                a.btn.btn-xs.btn-default(href='/posts/#{post.id}/ok') 예약 승인
+                | 
+                a.btn.btn-xs.btn-default(href='/posts/#{post.id}/no' ) 예약 거절
+         
 
-    //- a.btn.btn-primary(href='/posts/new') 글쓰기
+    
+  form#deleteForm(style='display:none', method="POST")
+            
+    script(type='text/javascript').
+      $(".delete").click(function(e) {
+        var id = $(e.currentTarget).data('id');
+        if (confirm('정말 삭제하시겠습니까?')) {
+          $("#deleteForm").attr('action', "/posts/" + id + "?_method=DELETE").submit();          
+        }
+        return false;
+      });

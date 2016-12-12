@@ -91,6 +91,11 @@ a {
       margin: 20px 0;
       color: #bbb; }
 
+#goh {
+  margin-top: 100px;
+  height: 80%;
+  width: 80%; }
+
 form.todos {
   width: 100%;
   margin: 0 0 1em 0;

@@ -22,33 +22,38 @@ block content
     b 주소
     p.well(style='white-space:pre;')= room.address
     b 지도
-      #map
-      script(type='text/javascript').
-        var mapContainer = document.getElementById('map'), 
-        mapOption = {
-          center: new daum.maps.LatLng(33.450701, 126.570667),
-          level: 3 
-        };  
-        var map = new daum.maps.Map(mapContainer, mapOption);
-        
-        var geocoder = new daum.maps.services.Geocoder();
+    .col-md-6 
+        div(id="map" style="width:70%;height:300px;")
+    
+    
 
-        geocoder.addr2coord('제주특별자치도 제주시 첨단로 242', function(status, result) {        
-            if (status === daum.maps.services.Status.OK) {
+    a.btn.btn-primary(href='/todos/show') 목록
+    
+    
+    script(type='text/javascript').
+      var mapContainer = document.getElementById('map'), 
+      mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667),
+        level: 3 
+      };  
+      var map = new daum.maps.Map(mapContainer, mapOption);
+      
+      var geocoder = new daum.maps.services.Geocoder();
 
-                var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
-              
-                var marker = new daum.maps.Marker({
-                    map: map,
-                    position: coords
-                });
+      geocoder.addr2coord('#{room.address}', function(status, result) {        
+          if (status === daum.maps.services.Status.OK) {
 
-                var infowindow = new daum.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">#{room.title}</div>'
-                });
-                infowindow.open(map, marker);
-                map.setCenter(coords);
-            } 
-        });
-    p
-    a.btn.9btn-default(href='/todos/show') 목록
+              var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+             
+              var marker = new daum.maps.Marker({
+                  map: map,
+                  position: coords
+              });
+
+              var infowindow = new daum.maps.InfoWindow({
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;">#{room.title}</div>'
+              });
+              infowindow.open(map, marker);
+              map.setCenter(coords);
+          } 
+      }); 

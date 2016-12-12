@@ -3,7 +3,23 @@ extends ../layout
 block content
   .container
     h1.page-header  방
-    a.btn.btn-primary(href='/todos/back') 뒤로가기
+    form(action="/todos/search", method='POST')
+      .input-group
+        h3
+          label(for='city') 도시
+            select(name='city')
+              option(value= '전체')전체
+              option(value= '한국')한국
+              option(value= '미국')미국
+              option(value= '프랑스')프랑스
+              option(value= '이탈리아')이탈리아
+              option(value= '인도')인도
+              option(value= '일본')일본
+              option(value= '중국')중국
+              option(value= '호주')호주
+        span.input-group-btn
+        button.btn.btn-default(type="submit" ) 검색  
+     
       //- | total #{pagination.numPosts} posts
     table.table.table-bordered
       thead
@@ -29,7 +45,7 @@ block content
             td= room.price
             td= room.read
             
-            if (currentUser.email == room.email) 
+            if (currentUser.email == room.email || currentUser.administer == 'yes') 
               td
                 a.btn.btn-xs.btn-default(href='/todos/#{room.id}/edit') 수정
                 | 
@@ -39,7 +55,7 @@ block content
             else
               td
                 a.btn.btn-xs.btn-default(href='/posts/#{room.id}/new') 예약
-            
+    a.btn.btn-primary(href='/todos/back') 뒤로가기
 
     
 

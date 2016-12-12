@@ -65,10 +65,34 @@ router.get("/:id", function (req, res, next) {
   });
 });
 
+
+router.post('/search', function(req, res, next) {
+
+
+   if(req.body.city === "전체"){
+    Room.find({}, function(err, rooms) {
+      if (err) {
+        return next(err);
+      }
+    res.render('posts/index' ,{rooms: rooms});
+    });
+  }else{
+    Room.find({city: req.body.city}, function(err, rooms){
+        if (err) {
+            return next(err);
+        }
+        res.render('posts/index', {rooms: rooms});
+    });
+  }
+
+
+});
+
+
 router.post("/", function (req, res, next) { // 방만들기
 
   var room = new Room({
-    
+
       title: req.body.title,
       content: req.body.content ,
       city: req.body.city,
@@ -80,7 +104,6 @@ router.post("/", function (req, res, next) { // 방만들기
       name: req.user.name,
       email: req.user.email
     }) ;
-
     room.save(function(err){
       if(err){
         return next(err);
@@ -89,7 +112,32 @@ router.post("/", function (req, res, next) { // 방만들기
       }
     });
 });
+router.put("/:id", function (req, res, next) { // 방만들기
+  Room.findById({_id: req.params.id}, function(err, room) {
+      if (err) {
+        return next(err);
+      }
 
+      title= req.body.title;
+      content= req.body.content;
+      city=req.body.city;
+      address=req.body.address;
+      facility=req.body.facility;
+      price=req.body.price;
+      rule= req.body.rule;
+
+      name=req.user.name;
+      email=req.user.email;
+
+      room.save(function(err){
+      if(err){
+        return next(err);
+      }else{
+        res.redirect('/todos');
+      }
+    });
+  });
+});
 router.delete('/:id', function(req, res, next) { // 삭제
   Room.findOneAndRemove({_id: req.params.id}, function(err){
     if(err){
