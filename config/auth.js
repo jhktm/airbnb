@@ -60,7 +60,9 @@ module.exports = function(passport) {
             if (!user) {
               user = new User({
                 name: profile.displayName,
-                email: profile.emails[0].value
+                email: profile.emails[0].value,
+                host: "host",
+                traveler:"traveler"
               });
             }
             user.facebook.id = profile.id;
