@@ -30,6 +30,7 @@ block content
               td=post.status
               td
                 a.btn.btn-xs.btn-default(data-id=post.id, class='delete') 삭제
+                a.btn.btn-xs.btn-default(href='/posts/#{post.id}/cancel') 예약취소
               td
                 
                 a.btn.btn-xs.btn-default(href='/posts/#{post.id}/ok') 예약 승인

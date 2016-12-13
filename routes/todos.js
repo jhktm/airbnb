@@ -117,17 +117,15 @@ router.put("/:id", function (req, res, next) { // 방만들기
       if (err) {
         return next(err);
       }
-
-      title= req.body.title;
-      content= req.body.content;
-      city=req.body.city;
-      address=req.body.address;
-      facility=req.body.facility;
-      price=req.body.price;
-      rule= req.body.rule;
-
-      name=req.user.name;
-      email=req.user.email;
+      room.title= req.body.title;
+      room.content= req.body.content;
+      room.city=req.body.city;
+      room.address=req.body.address;
+      room.facility=req.body.facility;
+      room.price=req.body.price;
+      room.rule= req.body.rule;
+      room.name=req.user.name;
+      room.email=req.user.email;
 
       room.save(function(err){
       if(err){

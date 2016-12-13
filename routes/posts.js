@@ -150,12 +150,27 @@ router.post("/:id", function (req, res, next) { // 방만들기
   });
   
 });
+router.get("/:id/cancel", function (req, res, next) { // 방만들기
+  Post.findById({_id: req.params.id}, function(err, posts) {
+      if (err) {
+        return next(err);
+      }
+      posts.status = "예약 취소";
+      posts.save(function(err){
+      if(err){
+        return next(err);
+      }else{
+        res.redirect('back');
+      }
+    });
+  });
+});
 router.get("/:id/ok", function (req, res, next) { // 방만들기
   Post.findById({_id: req.params.id}, function(err, posts) {
       if (err) {
         return next(err);
       }
-      posts.status = "승인되었습니다"
+      posts.status = "승인되었습니다";
       posts.save(function(err){
       if(err){
         return next(err);
@@ -171,7 +186,7 @@ router.get("/:id/no", function (req, res, next) { // 방만들기
       if (err) {
         return next(err);
       }
-      posts.status = "승인거절"
+      posts.status = "승인거절";
       posts.save(function(err){
       if(err){
         return next(err);
