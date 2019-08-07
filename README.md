@@ -6,4 +6,12 @@
 
 
 ## 2. 2013년
-코드 마무리 / 
+코드 마무리 /
+
+##Front end
+*HTML
+*Css
+
+##Back End
+*MonggoDB
+*Heroku
